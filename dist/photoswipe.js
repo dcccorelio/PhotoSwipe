@@ -1,6 +1,6 @@
-/*! PhotoSwipe - v4.1.1 - 2015-12-24
+/*! PhotoSwipe - v4.1.1 - 2016-09-26
 * http://photoswipe.com
-* Copyright (c) 2015 Dmitry Semenov; */
+* Copyright (c) 2016 Dmitry Semenov; */
 (function (root, factory) { 
 	if (typeof define === 'function' && define.amd) {
 		define(factory);
@@ -18,9 +18,9 @@
 /**
  *
  * Set of generic functions used by gallery.
- * 
+ *
  * You're free to modify anything here as long as functionality is kept.
- * 
+ *
  */
 var framework = {
 	features: null,
@@ -52,7 +52,7 @@ var framework = {
 	},
 	removeClass: function(el, className) {
 		var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
-		el.className = el.className.replace(reg, ' ').replace(/^\s\s*/, '').replace(/\s\s*$/, ''); 
+		el.className = el.className.replace(reg, ' ').replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 	},
 	addClass: function(el, className) {
 		if( !framework.hasClass(el,className) ) {
@@ -76,7 +76,7 @@ var framework = {
 		while(i--) {
 			if(array[i][key] === value) {
 				return i;
-			} 
+			}
 		}
 		return -1;
 	},
@@ -127,16 +127,16 @@ var framework = {
 	},
 
 	/**
-	 * 
+	 *
 	 * @return {object}
-	 * 
+	 *
 	 * {
 	 *  raf : request animation frame function
 	 *  caf : cancel animation frame function
 	 *  transfrom : transform property key (with vendor), or null if not supported
 	 *  oldIE : IE8 or below
 	 * }
-	 * 
+	 *
 	 */
 	detectFeatures: function() {
 		if(framework.features) {
@@ -161,14 +161,14 @@ var framework = {
 
 		// fix false-positive detection of old Android in new IE
 		// (IE11 ua string contains "Android 4.0")
-		
-		if(!features.pointerEvent) { 
+
+		if(!features.pointerEvent) {
 
 			var ua = navigator.userAgent;
 
-			// Detect if device is iPhone or iPod and if it's older than iOS 8
+			// Detect if device is iPhone or iPod and if it's older than iOS 9
 			// http://stackoverflow.com/a/14223920
-			// 
+			//
 			// This detection is made because of buggy top/bottom toolbars
 			// that don't trigger window.resize event.
 			// For more info refer to _isFixedPosition variable in core.js
@@ -177,7 +177,7 @@ var framework = {
 				var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
 				if(v && v.length > 0) {
 					v = parseInt(v[1], 10);
-					if(v >= 1 && v < 8 ) {
+					if(v >= 1 && v < 9 ) {
 						features.isOldIOSPhone = true;
 					}
 				}
@@ -186,7 +186,7 @@ var framework = {
 			// Detect old Android (before KitKat)
 			// due to bugs related to position:fixed
 			// http://stackoverflow.com/questions/7184573/pick-up-the-android-version-in-the-browser-by-javascript
-			
+
 			var match = ua.match(/Android\s([0-9\.]*)/);
 			var androidversion =  match ? match[1] : 0;
 			androidversion = parseFloat(androidversion);
@@ -195,12 +195,12 @@ var framework = {
 					features.isOldAndroid = true; // for fixed position bug & performance
 				}
 				features.androidVersion = androidversion; // for touchend bug
-			}	
+			}
 			features.isMobileOpera = /opera mini|opera mobi/i.test(ua);
 
 			// p.s. yes, yes, UA sniffing is bad, propose your solution for above bugs.
 		}
-		
+
 		var styleChecks = ['transform', 'perspective', 'animationName'],
 			vendors = ['', 'webkit','Moz','ms','O'],
 			styleCheckItem,
@@ -213,10 +213,10 @@ var framework = {
 				styleCheckItem = styleChecks[a];
 
 				// uppercase first letter of property name, if vendor is present
-				styleName = vendor + (vendor ? 
-										styleCheckItem.charAt(0).toUpperCase() + styleCheckItem.slice(1) : 
+				styleName = vendor + (vendor ?
+										styleCheckItem.charAt(0).toUpperCase() + styleCheckItem.slice(1) :
 										styleCheckItem);
-			
+
 				if(!features[styleCheckItem] && styleName in helperStyle ) {
 					features[styleCheckItem] = styleName;
 				}
@@ -226,12 +226,12 @@ var framework = {
 				vendor = vendor.toLowerCase();
 				features.raf = window[vendor+'RequestAnimationFrame'];
 				if(features.raf) {
-					features.caf = window[vendor+'CancelAnimationFrame'] || 
+					features.caf = window[vendor+'CancelAnimationFrame'] ||
 									window[vendor+'CancelRequestAnimationFrame'];
 				}
 			}
 		}
-			
+
 		if(!features.raf) {
 			var lastTime = 0;
 			features.raf = function(fn) {
@@ -245,7 +245,7 @@ var framework = {
 		}
 
 		// Detect SVG support
-		features.svg = !!document.createElementNS && 
+		features.svg = !!document.createElementNS &&
 						!!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect;
 
 		framework.features = features;
@@ -260,7 +260,7 @@ framework.detectFeatures();
 if(framework.features.oldIE) {
 
 	framework.bind = function(target, type, listener, unbind) {
-		
+
 		type = type.split(' ');
 
 		var methodName = (unbind ? 'detach' : 'attach') + 'Event',
@@ -290,7 +290,7 @@ if(framework.features.oldIE) {
 			}
 		}
 	};
-	
+
 }
 
 /*>>framework-bridge*/
