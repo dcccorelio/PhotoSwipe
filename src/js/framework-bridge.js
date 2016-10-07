@@ -149,7 +149,7 @@ var framework = {
 
 			var ua = navigator.userAgent;
 
-			// Detect if device is iPhone or iPod and if it's older than iOS 9
+			// Detect if device is iPhone or iPod and if it's older than iOS 8
 			// http://stackoverflow.com/a/14223920
 			//
 			// This detection is made because of buggy top/bottom toolbars
@@ -160,7 +160,7 @@ var framework = {
 				var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
 				if(v && v.length > 0) {
 					v = parseInt(v[1], 10);
-					if(v >= 1 && v < 9 ) {
+					if(v >= 1 && v < 8 ) {
 						features.isOldIOSPhone = true;
 					}
 				}
