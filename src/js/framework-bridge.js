@@ -166,6 +166,10 @@ var framework = {
 				}
 			}
 
+			if (/iP(hone|od|ad)/.test(navigator.platform)) {
+				features.isIOS = true;
+			}
+
 			// Detect old Android (before KitKat)
 			// due to bugs related to position:fixed
 			// http://stackoverflow.com/questions/7184573/pick-up-the-android-version-in-the-browser-by-javascript
