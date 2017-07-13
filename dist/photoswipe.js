@@ -1,6 +1,6 @@
-/*! PhotoSwipe - v4.1.1 - 2016-10-07
+/*! PhotoSwipe - v4.1.1 - 2017-07-13
 * http://photoswipe.com
-* Copyright (c) 2016 Dmitry Semenov; */
+* Copyright (c) 2017 Dmitry Semenov; */
 (function (root, factory) { 
 	if (typeof define === 'function' && define.amd) {
 		define(factory);
@@ -946,7 +946,7 @@ var publicMethods = {
 
 		_shout('afterInit');
 
-		if(!_isFixedPosition) {
+		if(_features.isOldIOSPhone || _features.isOldAndroid) {
 
 			// On all versions of iOS lower than 8.0, we check size of viewport every second.
 			//
