@@ -644,7 +644,7 @@ var publicMethods = {
 
 		_shout('afterInit');
 
-		if(!_isFixedPosition) {
+		if(_features.isOldIOSPhone || _features.isOldAndroid) {
 
 			// On all versions of iOS lower than 8.0, we check size of viewport every second.
 			//
